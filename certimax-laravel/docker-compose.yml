@@ -1,0 +1,43 @@
+version: '3.3'
+services:
+  app:
+    container_name: ps4CertiMax
+    image: appcerti:latest
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    tty: true
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+    networks:
+      - app-network
+
+  #MySQL Service
+  db:
+    image: mysql:5.7.22
+    container_name: db
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: ps4
+      MYSQL_ROOT_PASSWORD: asdfzxcv
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    networks:
+      lan:
+      - app-network
+      ipv4_address: 172.18.0.6
+
+#Docker Networks
+networks:
+  lan:
+  app-network:
+    driver: bridge
+    driver_opts:
+      parent: eth0
+    ipam:
+      config:
+        - subnet: "172.18.0.0/24"
