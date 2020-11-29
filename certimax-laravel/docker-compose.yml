@@ -1,7 +1,7 @@
 version: '3.3'
 services:
   app:
-    container_name: ps4CertiMax
+    container_name: appcerti
     image: appcerti:latest
     build:
       context: ./
@@ -11,7 +11,10 @@ services:
       SERVICE_NAME: app
       SERVICE_TAGS: dev
     networks:
-      - app-network
+      app-network:
+        ipv4_address: 172.18.0.4
+    ports:
+      - "8443:443"
 
   #MySQL Service
   db:
@@ -27,17 +30,15 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     networks:
-      lan:
-      - app-network
-      ipv4_address: 172.18.0.6
+      app-network:
+        ipv4_address: 172.18.0.5
 
 #Docker Networks
 networks:
-  lan:
   app-network:
     driver: bridge
     driver_opts:
       parent: eth0
     ipam:
       config:
-        - subnet: "172.18.0.0/24"
+        - subnet: 172.18.0.0/24
