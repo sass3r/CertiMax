@@ -19,12 +19,12 @@ void main() async {
 
   /// Create an Account from a given Private key.
   final account = Account.fromPrivateKey(
-      'AD1022C297DB287ADC9A466943DA053AC8C914C9346571E315E8F0B659A5BCBA',
+      'BB2B97D428832EFBA9816C62CC4911296EE3EE65DB19316D4AC1191028FE976C',
       networkType);
 
   /// Create an Address from a given Public key.
   final recipient =
-      Address.fromRawAddress('VDGNLD-X3VOMA-3XJVWB-72YUJT-IHV6LF-QR7CT2-ZQJJ');
+      Address.fromRawAddress('VDWQ4U-2GXAUY-SWNXBL-S3TUGT-Z3C6XT-R44ZVZ-BJ35');
 
   /// Create a  transaction type transfer
   final tx = TransferTransaction(
@@ -35,7 +35,7 @@ void main() async {
       // The List of mosaic to be sent.
       [xpxRelative(1)],
       // The transaction message of 1024 characters.
-      PlainMessage(payload: 'From ProximaX Dart SDK'),
+      PlainMessage(payload: 'https://drive.google.com/file/d/1OIPtsgIWjKT7ca_Gkv2aVxiUZD2SEJOx/view?usp=sharing'),
       networkType);
 
   print(tx.mosaics[0].assetId);
